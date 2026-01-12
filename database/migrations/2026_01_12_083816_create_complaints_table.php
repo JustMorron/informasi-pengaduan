@@ -19,8 +19,6 @@ return new class extends Migration {
             $table->string('gambar')->nullable();
             $table->enum('status', ['pending', 'diproses', 'selesai', 'ditolak'])->default('pending');
             $table->text('tanggapan')->nullable();
-            $table->date('tanggal_complaint');
-
             $table->timestamps();
         });
     }
