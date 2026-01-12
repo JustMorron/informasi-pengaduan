@@ -32,7 +32,7 @@ class AuthController extends Controller
 
             // Arahkan sesuai role
             if ($user->role === 'admin') {
-                return redirect()->route('dashboard')->with('success', 'Berhasil login sebagai Admin!');
+                return redirect()->route('dashboard.admin')->with('success', 'Berhasil login sebagai Admin!');
             } elseif ($user->role === 'petugas') {
                 return redirect()->route('petugas.index')->with('success', 'Berhasil login sebagai petugas!');
             } elseif ($user->role === 'masyarakat') {
