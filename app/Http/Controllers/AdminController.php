@@ -21,7 +21,7 @@ class AdminController extends Controller
         // Untuk chart (opsional)
         $pengaduanPerBulan = Complaint::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total')->whereYear('created_at', date('Y'))->groupBy('bulan')->orderBy('bulan')->get();
 
-        return view('admin.dashboard.index', compact('totalPengaduan', 'pengaduanSelesai', 'pengaduanDiproses', 'pengaduanPerBulan'));
+        return view('admin.dashboard.index', compact('totalPengaduan', 'pengaduanTertunda', 'pengaduanSelesai', 'pengaduanPerBulan'));
     }
 
     public function pengaduan()
