@@ -14,22 +14,22 @@
 
 
                         <li class='sidebar-title'>Main Menu</li>
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('dashboard-admin') ? 'active' : '' }} ">
+                            <a href="{{ route('dashboard-admin') }}" class='sidebar-link'>
                                 <i data-feather="home" width="20"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  ">
-                            <a href="form-editor.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('kelola-pengaduan-admin') ? 'active' : '' }} ">
+                            <a href="{{ route('kelola-pengaduan-admin') }}" class='sidebar-link'>
                                 <i data-feather="layers" width="20"></i>
-                                <span>Kelola Pengguna</span>
+                                <span>Kelola Pengaduan</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  ">
-                            <a href="form-editor.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('kelola-masyarakat-admin') ? 'active' : '' }} ">
+                            <a href="{{ route('kelola-masyarakat-admin') }}" class='sidebar-link'>
                                 <i data-feather="layers" width="20"></i>
                                 <span>Kelola Masyarakat</span>
                             </a>

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('masyarakat_id')->constrained('masyarakats')->onDelete('cascade');
             $table->string('judul');
             $table->text('isi_complaint');
-            $table->enum('jenis_pengaduan', ['keterlambatan_pelayanan', 'sikap_petugas', 'prosedur_pelayanan', 'sarana_prasarana', 'lainnya']);
+            $table->enum('jenis_pengaduan', ['keterlambatan pelayanan', 'sikap petugas', 'prosedur pelayanan', 'sarana prasarana', 'lainnya']);
             $table->string('gambar')->nullable();
             $table->enum('status', ['pending', 'diproses', 'selesai', 'ditolak'])->default('pending');
             $table->text('tanggapan')->nullable();
