@@ -38,20 +38,26 @@
                                 {{-- buat logo profile --}}
                                 <div class="avatar bg-warning mr-3">
                                     {{-- <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset=""> --}}
-                                    <span class="avatar-content">AS</span>
+                                    <span class="avatar-content"> @php
+                                        $user = Auth::user();
+                                        $nama = $user->name ?? 'User';
+                                        $inisial = strtoupper(substr($nama, 0, 2));
+                                    @endphp
+                                        {{ $inisial }}
+                                    </span>
 
                                 </div>
 
                                 {{-- buat sama profile --}}
-                                <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+                                <div class="d-none d-md-block d-lg-inline-block">Hi, {{ $user->name ?? 'User' }}</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                <a class="dropdown-item active" href="#"><i data-feather="mail"></i>
-                                    Messages</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalLogout"><i
+                                        data-feather="log-out"></i> Logout</a>
+
+
                             </div>
                         </li>
                     </ul>
@@ -114,6 +120,41 @@
         }, 3000);
     </script>
 
+
+    <!-- Vertically Centered modal Modal -->
+    <div class="modal fade" id="exampleModalLogout" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Logout
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Yakin ingin Logout?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="btn btn-danger ml-1">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Logout</span>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{{ asset('assets/js/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
