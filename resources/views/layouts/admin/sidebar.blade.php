@@ -3,7 +3,7 @@
                 <div class="sidebar-header">
                     {{-- <img src="assets/images/logo.svg" alt="" srcset=""> --}}
                     {{-- <h4>Dashboard Admin</h3> --}}
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ route('dashboard-admin') }}" class='sidebar-link'>
 
                         <span>Dashboard</span>
                     </a>

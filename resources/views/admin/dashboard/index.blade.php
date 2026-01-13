@@ -11,22 +11,53 @@
 @endsection
 
 @section('main')
-    <div class="row mb-2">
+    <div class="row mb-4">
+        <!-- Total Pengaduan -->
         <div class="col-12 col-md-4">
-            <div class="card card-statistic">
-                <div class="card-body p-0">
-                    <div class="d-flex flex-column">
-                        <div class='px-3 py-3 d-flex justify-content-between'>
-                            <h3 class='card-title'>Total Pengaduan</h3>
+            <div class="card card-statistic text-center">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center">
+                        <h3 class="card-title text-dark mb-3">Total Pengaduan</h3>
+                        <div class="number-display">
+                            <h1 class="display-4 font-weight-bold text-dark">{{ $totalPengaduan }}</h1>
                         </div>
-                        <div class="chart-wrapper">
-                            <canvas id="canvas1" style="height:100px !important"></canvas>
-                        </div>
+                        <a href="{{ route('kelola-pengaduan-admin') }}" class="text-dark mt-2">Semua Status Pengaduan</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Total Pengaduan -->
         <div class="col-12 col-md-4">
+            <div class="card card-statistic text-center">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center">
+                        <h3 class="card-title text-dark mb-3">Pengaduan Tertunda</h3>
+                        <div class="number-display">
+                            <h1 class="display-4 font-weight-bold text-dark">{{ $pengaduanTertunda }}</h1>
+                        </div>
+                        <a href="{{ route('kelola-pengaduan-admin') }}" class="text-dark mt-2">Semua Status Pengaduan
+                            Tertunda</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Total Pengaduan -->
+        <div class="col-12 col-md-4">
+            <div class="card card-statistic text-center">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center">
+                        <h3 class="card-title text-dark mb-3">Pengaduan Selesai</h3>
+                        <div class="number-display">
+                            <h1 class="display-4 font-weight-bold text-dark">{{ $pengaduanSelesai }}</h1>
+                        </div>
+                        <a href="{{ route('kelola-pengaduan-admin') }}" class="text-dark mt-2">Semua Status Pengaduan
+                            Selesai</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- <div class="col-12 col-md-4">
             <div class="card card-statistic">
                 <div class="card-body p-0">
                     <div class="d-flex flex-column">
@@ -53,6 +84,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection

@@ -14,11 +14,14 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        // return view('admin.dashboard.index');
+        $totalPengaduan = Complaint::count();
+        $pengaduanTertunda = Complaint::where('status', 'pending')->count();
+        $pengaduanSelesai = Complaint::where('status', 'selesai')->count();
 
-        $complaints = Complaint::with('masyarakat.user')->get();
+        // Untuk chart (opsional)
+        $pengaduanPerBulan = Complaint::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total')->whereYear('created_at', date('Y'))->groupBy('bulan')->orderBy('bulan')->get();
 
-        return view('admin.dashboard.index', compact('complaints'));
+        return view('admin.dashboard.index', compact('totalPengaduan', 'pengaduanSelesai', 'pengaduanDiproses', 'pengaduanPerBulan'));
     }
 
     public function pengaduan()
