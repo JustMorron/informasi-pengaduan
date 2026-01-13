@@ -48,7 +48,44 @@ class AuthController extends Controller
             ->onlyInput('email');
     }
 
-    //perintah logout
+    public function profile()
+    {
+        $user = Auth::user();
+
+        return view('auth.edit', compact('user'));
+    }
+
+    public function profileupdate(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|required_with:new_password',
+            'new_password' => 'nullable|min:8|confirmed',
+        ]);
+
+        try {
+            $user->name = $validated['name'];
+            $user->email = $validated['email'];
+
+            if (!empty($validated['password']) && !empty($validated['new_password'])) {
+                if (Hash::check($validated['password'], $user->password)) {
+                    $user->password = Hash::make($validated['new_password']);
+                } else {
+                    return back()->with('error', 'Password saat ini salah.');
+                }
+            }
+
+            $user->save();
+
+            return redirect()->route('profile-admin')->with('success', 'Profil berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memperbarui profil: ' . $e->getMessage());
+        }
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

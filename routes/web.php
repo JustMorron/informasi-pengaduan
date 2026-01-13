@@ -29,4 +29,8 @@ Route::middleware(RoleMiddleware::class . ':admin')->group(function () {
     Route::get('/tambah-masyarakat', [AdminController::class, 'createmasyarakat'])->name('create-masyarakat-admin');
     Route::post('/tambah-masyarakat', [AdminController::class, 'storemasyarakat'])->name('store-masyarakat-admin');
     Route::delete('/kelola-masyarakat/{id}', [AdminController::class, 'destroymasyarakat'])->name('destroy-masyarakat-admin');
+
+    //kelola user
+    Route::get('/kelola-profile', [AuthController::class, 'profile'])->name('profile-admin');
+    Route::put('/kelola-profile', [AuthController::class, 'profileupdate'])->name('update-profile-admin');
 });
