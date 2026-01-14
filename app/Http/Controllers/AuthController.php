@@ -34,7 +34,7 @@ class AuthController extends Controller
             if ($user->role === 'admin') {
                 return redirect()->route('dashboard-admin')->with('success', 'Berhasil login sebagai Admin!');
             } elseif ($user->role === 'petugas') {
-                return redirect()->route('petugas.index')->with('success', 'Berhasil login sebagai petugas!');
+                return redirect()->route('dashboard-petugas')->with('success', 'Berhasil login sebagai petugas!');
             } elseif ($user->role === 'masyarakat') {
                 return redirect()->route('masyarakat.index')->with('success', 'Berhasil login sebagai masyarakat!');
             }
@@ -52,7 +52,7 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        return view('auth.edit', compact('user'));
+        return view('admin.profile.index', compact('user'));
     }
 
     public function profileupdate(Request $request)
@@ -81,6 +81,43 @@ class AuthController extends Controller
             $user->save();
 
             return redirect()->route('profile-admin')->with('success', 'Profil berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memperbarui profil: ' . $e->getMessage());
+        }
+    }
+    public function profilepetugas()
+    {
+        $user = Auth::user();
+
+        return view('petugas.profile.index', compact('user'));
+    }
+
+    public function profileupdatepetugas(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|required_with:new_password',
+            'new_password' => 'nullable|min:8|confirmed',
+        ]);
+
+        try {
+            $user->name = $validated['name'];
+            $user->email = $validated['email'];
+
+            if (!empty($validated['password']) && !empty($validated['new_password'])) {
+                if (Hash::check($validated['password'], $user->password)) {
+                    $user->password = Hash::make($validated['new_password']);
+                } else {
+                    return back()->with('error', 'Password saat ini salah.');
+                }
+            }
+
+            $user->save();
+
+            return redirect()->route('profile-petugas')->with('success', 'Profil berhasil diperbarui.');
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal memperbarui profil: ' . $e->getMessage());
         }
