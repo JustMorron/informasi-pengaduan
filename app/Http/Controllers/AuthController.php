@@ -171,6 +171,56 @@ class AuthController extends Controller
         return view('masyarakat.profile.index', compact('masyarakats', 'user', 'complaints'));
     }
 
+    public function register(Request $request)
+    {
+        return view('auth.create');
+    }
+
+    public function registerproses(Request $request)
+    {
+        // Validasi input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'nik' => 'required|string|unique:masyarakats,nik',
+            'pekerjaan' => 'nullable|string|max:255',
+            'alamat' => 'nullable|string|max:500',
+            'tanggal_lahir' => 'nullable|date',
+            'no_hp' => 'nullable|',
+            'status_pernikahan' => 'nullable|',
+        ]);
+
+        try {
+            // Buat user baru
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password']),
+                'role' => 'masyarakat', // pastikan role ada
+            ]);
+
+            // Buat data masyarakat
+            Masyarakat::create([
+                'user_id' => $user->id,
+                'nik' => $validated['nik'],
+                'pekerjaan' => $validated['pekerjaan'] ?? null,
+                'alamat' => $validated['alamat'] ?? null,
+                'tanggal_lahir' => $validated['tanggal_lahir'] ?? null,
+                'no_hp' => $validated['no_hp'] ?? null,
+                'status_pernikahan' => $validated['status_pernikahan'] ?? null,
+            ]);
+
+            return view('auth.create', [
+                'success' => 'Data masyarakat berhasil ditambahkan.',
+            ]);
+        } catch (\Exception $e) {
+            return view('auth.create', [
+                'error' => 'Gagal menambahkan masyarakat: ' . $e->getMessage(),
+            ]);
+        }
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

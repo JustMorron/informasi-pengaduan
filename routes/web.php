@@ -8,12 +8,10 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\MasyarakatController;
 use App\Http\Middleware\RoleMiddleware;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'registerproses'])->name('register-prosess');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(RoleMiddleware::class . ':admin')->group(function () {
