@@ -18,10 +18,9 @@ class MasyarakatController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $masyarakats = $user->masyarakat; // langsung ambil relasi
 
-        $masyarakats = Masyarakat::where('user_id', $user->id)->with('user')->first();
-
-        $complaints = Complaint::where('masyarakat_id', $masyarakats->id)->latest()->take(5)->get();
+        $complaints = $masyarakats ? $masyarakats->complaints()->latest()->take(5)->get() : collect();
 
         return view('masyarakat.dashboard.index', compact('masyarakats', 'user', 'complaints'));
     }

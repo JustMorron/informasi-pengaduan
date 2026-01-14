@@ -127,7 +127,11 @@ class AuthController extends Controller
     public function storeprofile(Request $request)
     {
         $user = Auth::user();
-        $masyarakat = $user->masyarakat;
+        $masyarakat = $user->masyarakat; // pastikan relasi hasOne Masyarakat di User model
+
+        if (!$masyarakat) {
+            return back()->with('error', 'Data masyarakat tidak ditemukan.');
+        }
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -137,11 +141,14 @@ class AuthController extends Controller
             'nik' => 'required|string|unique:masyarakats,nik,' . $masyarakat->id,
             'pekerjaan' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:500',
-            'tgl_lahir' => 'nullable|date',
+            'tanggal_lahir' => 'nullable|date',
+            'jenis_kelamin' => 'nullable|string|max:20',
+            'no_hp' => 'nullable|string|max:20',
             'status_pernikahan' => 'nullable|string|max:100',
         ]);
 
         try {
+            // Update data user
             $user->name = $validated['name'];
             $user->email = $validated['email'];
 
@@ -152,8 +159,17 @@ class AuthController extends Controller
                     return back()->with('error', 'Password saat ini salah.');
                 }
             }
-
             $user->save();
+
+            // Update data masyarakat
+            $masyarakat->nik = $validated['nik'];
+            $masyarakat->pekerjaan = $validated['pekerjaan'];
+            $masyarakat->alamat = $validated['alamat'];
+            $masyarakat->tanggal_lahir = $validated['tanggal_lahir'];
+            $masyarakat->jenis_kelamin = $validated['jenis_kelamin'];
+            $masyarakat->no_hp = $validated['no_hp'];
+            $masyarakat->status_pernikahan = $validated['status_pernikahan'];
+            $masyarakat->save();
 
             return redirect()->route('profile-masyarakat')->with('success', 'Profil berhasil diperbarui.');
         } catch (\Exception $e) {

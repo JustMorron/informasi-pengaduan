@@ -62,7 +62,7 @@
                         <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
                             <div class="sm:col-span-1">
                                 <dt class="text-sm font-medium text-gray-500">Email</dt>
-                                <dd class="mt-1 text-sm text-gray-900">{{ $masyarakats->user->email }}</dd>
+                                <dd class="mt-1 text-sm text-gray-900">{{ $masyarakats->user->email ?: '-' }}</dd>
                             </div>
                             <div class="sm:col-span-1">
                                 <dt class="text-sm font-medium text-gray-500">Telepon</dt>
