@@ -33,7 +33,7 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Judul</th>
-                            <th>Gambar</th>
+                            {{-- <th>Gambar</th> --}}
                             <th>Status</th>
                             <th>Tanggapan</th>
                             <th>Aksi</th>
@@ -47,23 +47,30 @@
                                 <td class="px-4 py-2"> {{ $complaint->masyarakat->user->name }}
                                 </td>
                                 <td class="px-4 py-2">{{ $complaint->judul }}</td>
-                                <td class="px-4 py-2">
+                                {{-- <td class="px-4 py-2">
                                     @if ($complaint->gambar)
-                                        <img src="{{ $complaint->gambar }}" alt="Lampiran"
-                                            class="w-12 h-12 object-cover rounded">
+                                        <img src="{{ asset('storage/' . $complaint->gambar) }}" alt="Lampiran"
+                                            style="width:100px;height:100px;object-fit:cover;border-radius:4px;">
                                     @else
                                         <span class="text-gray-400">Tidak ada</span>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td class="px-4 py-2">{{ $complaint->status }}</td>
-                                <td class="px-4 py-2">{{ $complaint->tanggapan }}</td>
+                                <td class="px-4 py-2">
+                                    @if ($complaint->tanggapan)
+                                        <span class="text-gray-400">{{ $complaint->tanggapan }}</span>
+                                    @else
+                                        <span class="text-gray-400">Tidak ada</span>
+                                    @endif
+
+                                </td>
                                 <td class="px-4 py-2">
                                     <div class="d-flex flex-nowrap">
                                         <a href="{{ route('admin-pengaduan-show', $complaint->id) }}"
                                             class="btn btn-warning btn-sm mr-1">Edit</a>
 
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#exampleModalCenter-{{ $complaint->masyarakat->user->id }}">
+                                            data-target="#exampleModalCenter-{{ $complaint->id }}">
                                             Hapus
                                         </button>
                                     </div>
@@ -71,8 +78,8 @@
                             </tr>
 
                             <!-- Vertically Centered modal Modal -->
-                            <div class="modal fade" id="exampleModalCenter-{{ $complaint->masyarakat->user->id }}"
-                                tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="exampleModalCenter-{{ $complaint->id }}" tabindex="-1"
+                                role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
                                     role="document">
                                     <div class="modal-content">

@@ -48,7 +48,7 @@
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">Nama Lengkap</dt>
-                                    <dd class="text-lg font-medium text-gray-900">{{ $masyarakats->user->name }}</dd>
+                                    <dd class="text-lg font-medium text-gray-900">{{ $user->name }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                         <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
                             <div class="sm:col-span-1">
                                 <dt class="text-sm font-medium text-gray-500">Email</dt>
-                                <dd class="mt-1 text-sm text-gray-900">{{ $masyarakats->user->email }}</dd>
+                                <dd class="mt-1 text-sm text-gray-900">{{ $masyarakats->email }}</dd>
                             </div>
                             <div class="sm:col-span-1">
                                 <dt class="text-sm font-medium text-gray-500">Telepon</dt>
@@ -85,17 +85,17 @@
                     <div class="p-5">
                         <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Aksi Cepat</h3>
                         <div class="space-y-3">
-                            <a href="{{ route('create-pengaduan-masyarakat') }}"
+                            <a href="{{ route('user.complaints.create') }}"
                                 class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded block text-center">
                                 Buat Pengaduan Baru
                             </a>
-                            <a href="{{ route('pengaduan-masyarakat') }}"
+                            <a href="{{ route('user.complaints.index') }}"
                                 class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded block text-center">
                                 Lihat Riwayat Pengaduan
                             </a>
                             <button
                                 class="w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                                <a href="{{ route('profile-masyarakat') }}"
+                                <a href="{{ route('user.profile.edit') }}"
                                     class="block w-full h-full text-center">Update Profil</a>
                             </button>
                         </div>
@@ -112,13 +112,19 @@
                             <h3 class="text-lg leading-6 font-medium text-gray-900">Pengaduan Terbaru</h3>
                             <p class="mt-1 max-w-2xl text-sm text-gray-500">Riwayat pengaduan Anda</p>
                         </div>
-                        <a href="{{ route('pengaduan-masyarakat') }}"
+                        <a href="{{ route('user.complaints.index') }}"
                             class="text-blue-600 hover:text-blue-500 text-sm font-medium">
                             Lihat Semua →
                         </a>
                     </div>
                     <div class="border-t border-gray-200">
-                        @if ($complaints->count())
+                        @php
+                            $recentComplaints = \App\Models\Complaint::where('user_id', $user->id)
+                                ->latest()
+                                ->take(5)
+                                ->get();
+                        @endphp
+                        @if ($recentComplaints->count() > 0)
                             <div class="overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
@@ -138,17 +144,21 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach ($complaints as $complaint)
+                                        @foreach ($recentComplaints as $complaint)
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <div class="flex items-center">
+                                                        @if ($complaint->image)
+                                                            <img src="{{ $complaint->image_url }}" alt="Lampiran"
+                                                                class="w-8 h-8 object-cover rounded mr-3">
+                                                        @endif
                                                         <div>
                                                             <div
                                                                 class="text-sm font-medium text-gray-900 max-w-xs truncate">
-                                                                {{ $complaint->judul }}
+                                                                {{ $complaint->title }}
                                                             </div>
                                                             <div class="text-sm text-gray-500 max-w-xs truncate">
-                                                                {{ \Illuminate\Support\Str::limit($complaint->isi_complaint, 60) }}
+                                                                {{ \Illuminate\Support\Str::limit($complaint->description, 60) }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -165,7 +175,7 @@
                                                             </svg>
                                                             Menunggu
                                                         </span>
-                                                    @elseif($complaint->status == 'diproses')
+                                                    @elseif($complaint->status == 'processing')
                                                         <span
                                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                                             <svg class="w-4 h-4 mr-1" fill="currentColor"
@@ -176,7 +186,7 @@
                                                             </svg>
                                                             Diproses
                                                         </span>
-                                                    @elseif($complaint->status == 'selesai')
+                                                    @elseif($complaint->status == 'resolved')
                                                         <span
                                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                                             <svg class="w-4 h-4 mr-1" fill="currentColor"
@@ -195,19 +205,23 @@
                                                     @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <span>
-                                                        @php
-                                                            $jenisPengaduan = [
-                                                                'keterlambatan pelayanan' =>
-                                                                    '⏰ Keterlambatan Pelayanan',
-                                                                'sikap petugas' => '🙍 Sikap Petugas',
-                                                                'prosedur pelayanan' => '📑 Prosedur Pelayanan',
-                                                                'sarana prasarana' => '🏢 Sarana & Prasarana',
-                                                                'lainnya' => '📝 Lainnya',
-                                                            ];
-                                                        @endphp
-                                                        {{ $jenisPengaduan[$complaint->jenis_pengaduan] ?? '❓ Tidak Diketahui' }}
-
+                                                    <span
+                                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                        {{ $complaint->category == 'infrastruktur'
+                                                            ? '🏗️ Infrastruktur'
+                                                            : ($complaint->category == 'pelayanan_publik'
+                                                                ? '🏛️ Pelayanan Publik'
+                                                                : ($complaint->category == 'keamanan'
+                                                                    ? '🚔 Keamanan'
+                                                                    : ($complaint->category == 'lingkungan'
+                                                                        ? '🌱 Lingkungan'
+                                                                        : ($complaint->category == 'administrasi'
+                                                                            ? '📄 Administrasi'
+                                                                            : ($complaint->category == 'kesehatan'
+                                                                                ? '🏥 Kesehatan'
+                                                                                : ($complaint->category == 'pendidikan'
+                                                                                    ? '📚 Pendidikan'
+                                                                                    : '📝 Lainnya')))))) }}
                                                     </span>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

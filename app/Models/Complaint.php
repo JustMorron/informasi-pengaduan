@@ -9,7 +9,7 @@ use App\Models\Complaint;
 
 class Complaint extends Model
 {
-    protected $fillable = ['judul', 'isi_complaint', 'jenis_pengaduan', 'gambar', 'status', 'tanggapan'];
+    protected $fillable = ['masyarakat_id', 'judul', 'isi_complaint', 'jenis_pengaduan', 'gambar', 'status', 'tanggapan'];
 
     // public function masyarakats()
     // {

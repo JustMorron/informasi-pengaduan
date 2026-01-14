@@ -26,7 +26,7 @@ class AdminController extends Controller
 
     public function pengaduan()
     {
-        $complaints = Complaint::with('masyarakat.user')->get();
+        $complaints = Complaint::with('masyarakat.user')->orderBy('id', 'desc')->get();
 
         return view('admin.pengaduan.index', compact('complaints'));
     }

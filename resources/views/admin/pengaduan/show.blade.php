@@ -80,6 +80,14 @@
                                         <input type="text" class="form-control" readonly value="Tidak ada lampiran">
                                     @endif
 
+                                    {{-- @if ($complaint->gambar)
+                                        <img src="{{ asset('storage/' . $complaint->gambar) }}" alt="Lampiran"
+                                            style="width:100px;height:100px;object-fit:cover;border-radius:4px;">
+                                    @else
+                                        <span class="text-gray-400">Tidak ada</span>
+                                    @endif --}}
+
+
                                 </div>
                                 <div class="col-md-4">
                                     <label>Status</label>
@@ -145,7 +153,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        <img src="{{ $complaints->gambar }}" alt="{{ $complaints->gambar }}">
+                        <img src="{{ asset('storage/' . $complaints->gambar) }}" alt="Lampiran">
                     </p>
                 </div>
                 <div class="modal-footer">

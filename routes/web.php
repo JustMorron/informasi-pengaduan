@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\MasyarakatController;
 use App\Http\Middleware\RoleMiddleware;
 
 // Route::get('/', function () {
@@ -46,3 +47,11 @@ Route::middleware(RoleMiddleware::class . ':petugas')->group(function () {
     Route::get('/petugas/kelola-profile', [AuthController::class, 'profilepetugas'])->name('profile-petugas');
     Route::put('/petugas/kelola-profile', [AuthController::class, 'profileupdatepetugas'])->name('update-profile-petugas');
 });
+
+Route::get('/masyarakat/dashboard', [MasyarakatController::class, 'index'])->name('dashboard-masyarakat');
+Route::get('/masyarakat/pengaduan', [MasyarakatController::class, 'complainIndex'])->name('pengaduan-masyarakat');
+Route::get('/masyarakat/tambah', [MasyarakatController::class, 'create'])->name('create-pengaduan-masyarakat');
+Route::post('/masyarakat/tambah', [MasyarakatController::class, 'store'])->name('store-pengaduan-masyarakat');
+
+Route::get('/masyarakat/profile', [AuthController::class, 'indexprofile'])->name('profile-masyarakat');
+Route::post('/masyarakat/profile', [AuthController::class, 'storeprofile'])->name('update-profile-masyarakat');
