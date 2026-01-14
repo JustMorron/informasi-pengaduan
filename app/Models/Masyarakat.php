@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Complaint;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Masyarakat extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['user_id', 'nik', 'pekerjaan', 'status_pernikahan', 'tanggal_lahir', 'alamat', 'no_hp', 'jenis_kelamin'];
 
     public function user()
