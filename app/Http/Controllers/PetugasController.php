@@ -48,7 +48,8 @@ class PetugasController extends Controller
      */
     public function indexlaporan()
     {
-        $complaints = Complaint::with('masyarakat.user')->get();
+        // $complaints = Complaint::with('masyarakat.user')->get();
+        $complaints = Complaint::with('masyarakat.user')->orderBy('id', 'desc')->get();
 
         return view('petugas.pengaduan.index', compact('complaints'));
     }

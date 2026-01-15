@@ -141,7 +141,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        <img src="{{ $complaints->gambar }}" alt="{{ $complaints->gambar }}">
+                        <img src="{{ asset('storage/' . $complaints->gambar) }}" alt="Lampiran">
                     </p>
                 </div>
                 <div class="modal-footer">

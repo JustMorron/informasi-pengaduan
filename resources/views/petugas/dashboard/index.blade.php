@@ -2,12 +2,9 @@
 
 @section('title', 'Dashboard Admin')
 
-@section('content')
-    <h1>Dashboard Admin</h1>
-@endsection
-
-@section('content-title')
-    <p class="text-subtitle text-muted">Ini adalah halaman dashboard admin</p>
+@section('page-title')
+    <h1>Dashboard Kepala MPP</h1>
+    <p class="text-subtitle text-muted">Ini adalah halaman dashboard Kepala MPP</p>
 @endsection
 
 @section('main')

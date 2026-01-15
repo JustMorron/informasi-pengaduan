@@ -183,14 +183,14 @@
                 </select>
                 <div class="mb-6">
                     <label for="password" class="mt-2 block text-sm font-medium text-gray-700 mb-2">
-                        Passowrd
+                        Password
                     </label>
                     <input type="password" id="password" name="password"
                         class="mt-1 block w-full border-gray-300  rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('password')  @enderror">
                 </div>
                 <div class="mb-6">
                     <label for="password_confirmation" class="mt-2 block text-sm font-medium text-gray-700 mb-2">
-                        Passowrd
+                        Konfirmasi Password
                     </label>
                     <input type="password" id="password_confirmation" name="password_confirmation"
                         class="mt-1 block w-full border-gray-300  rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('password')  @enderror">
