@@ -62,6 +62,13 @@
                                         value="{{ $complaints->jenis_pengaduan }}">
                                 </div>
                                 <div class="col-md-4">
+                                    <label>Instansi Tujuan</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input type="text" id="first-name" class="form-control" name="instansi"
+                                        value="{{ $complaints->instansi }}">
+                                </div>
+                                <div class="col-md-4">
                                     <label>Gambar</label>
                                 </div>
                                 <div class="col-md-8 form-group">

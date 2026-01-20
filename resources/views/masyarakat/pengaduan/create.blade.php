@@ -64,20 +64,7 @@
                     @csrf
 
                     <div class="mb-6">
-                        <label for="jenis_pengaduan" class="block text-sm font-medium text-gray-700 mb-2">
-                            Kategori Pengaduan <span class="text-red-500">*</span>
-                        </label>
-                        <select id="jenis_pengaduan" name="jenis_pengaduan"
-                            class="mt-1 block w-full  border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('category')  @enderror"
-                            required>
-                            <option value="">Pilih kategori pengaduan</option>
-                            <option value="keterlambatan pelayanan">⏰ Keterlambatan Pelayanan</option>
-                            <option value="sikap petugas">🙍 Sikap Petugas</option>
-                            <option value="prosedur pelayanan">📑 Prosedur Pelayanan</option>
-                            <option value="sarana prasarana">🏢 Sarana & Prasarana</option>
-                            <option value="lainnya">📝 Lainnya</option>
 
-                        </select>
                         <div class="mb-6">
                             <label for="judul" class="block text-sm font-medium text-gray-700 mb-2">
                                 Judul Pengaduan <span class="text-red-500">*</span>
@@ -101,19 +88,70 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-                        <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">
-                            Lampiran Gambar
-                        </label>
-                        <input type="file" id="gambar" name="gambar" accept="image/*"
-                            class="mt-1 block w-full border-gray-300 px-4 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 @error('gambar')  @enderror">
-                        @error('gambar')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                        <p class="mt-2 text-sm text-gray-500">
-                            Upload gambar pendukung pengaduan (format: JPG, PNG, GIF, maksimal 2MB). Opsional.
-                        </p>
-                    </div>
 
+                        <div class="mb-6">
+                            <label for="jenis_pengaduan" class="block text-sm font-medium text-gray-700 mb-2">
+                                Kategori Pengaduan <span class="text-red-500">*</span>
+                            </label>
+                            <select id="jenis_pengaduan" name="jenis_pengaduan"
+                                class="mt-1 block w-full  border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('category')  @enderror"
+                                required>
+                                <option value="">-- Pilih Kategori Pengaduan --</option>
+                                <option value="keterlambatan pelayanan">Keterlambatan Pelayanan</option>
+                                <option value="sikap petugas">Sikap / Perilaku Petugas</option>
+                                <option value="prosedur pelayanan">Prosedur Pelayanan</option>
+                                <option value="sarana prasarana">Sarana dan Prasarana</option>
+                                <option value="kesalahan administrasi">Kesalahan Administrasi</option>
+                                <option value="pungutan liar">Pungutan Tidak Resmi</option>
+                                <option value="sistem pelayanan">Sistem / Aplikasi Pelayanan</option>
+                                <option value="informasi pelayanan">Informasi Pelayanan</option>
+                                <option value="keamanan kenyamanan">Keamanan dan Kenyamanan</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="instansi" class="block text-sm font-medium text-gray-700 mb-2">
+                                Instansi Tujuan<span class="text-red-500">*</span>
+                            </label>
+                            <select id="instansi" name="instansi"
+                                class="mt-1 block w-full  border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('category')  @enderror"
+                                required>
+                                <option value="">-- Pilih Instansi --</option>
+                                <option value="Disdukcapil">Disdukcapil</option>
+                                <option value="DPMPTSP">DPMPTSP</option>
+                                <option value="Bapenda">Bapenda</option>
+                                <option value="Dishub">Dishub</option>
+                                <option value="Disnaker">Disnaker</option>
+                                <option value="Dinsos">Dinas Sosial</option>
+                                <option value="Dinkes">Dinas Kesehatan</option>
+                                <option value="Polri">Polri</option>
+                                <option value="Kemenag">Kementerian Agama</option>
+                                <option value="Imigrasi">Imigrasi</option>
+                                <option value="Kantor Pajak">Kantor Pajak</option>
+                                <option value="BPJS Kesehatan">BPJS Kesehatan</option>
+                                <option value="BPJS Ketenagakerjaan">BPJS Ketenagakerjaan</option>
+                                <option value="PLN">PLN</option>
+                                <option value="PDAM">PDAM</option>
+                                <option value="Perbankan">Perbankan</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2 mt-2">
+                                Lampiran Gambar (Opsional)
+                            </label>
+                            <input type="file" id="gambar" name="gambar" accept="image/*"
+                                class="mt-1 block w-full border-gray-300 px-4 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 @error('gambar')  @enderror">
+                            @error('gambar')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-2 text-sm text-gray-500">
+                                Upload gambar pendukung pengaduan (format: JPG, PNG, GIF, maksimal 2MB). Opsional.
+                            </p>
+                        </div>
+                    </div>
                     {{-- <div class="mb-6">
                         <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
                             <div class="flex">

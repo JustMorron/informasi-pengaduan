@@ -68,6 +68,9 @@
                                     Kategori</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Tanggapan</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Tanggal</th>
                             </tr>
                         </thead>
@@ -128,15 +131,49 @@
                                         <span>
                                             @php
                                                 $jenisPengaduan = [
-                                                    'keterlambatan pelayanan' => '⏰ Keterlambatan Pelayanan',
-                                                    'sikap petugas' => '🙍 Sikap Petugas',
-                                                    'prosedur pelayanan' => '📑 Prosedur Pelayanan',
-                                                    'sarana prasarana' => '🏢 Sarana & Prasarana',
-                                                    'lainnya' => '📝 Lainnya',
+                                                    'keterlambatan pelayanan' => 'Keterlambatan Pelayanan',
+                                                    'sikap petugas' => 'Sikap Petugas',
+                                                    'prosedur pelayanan' => 'Prosedur Pelayanan',
+                                                    'sarana prasarana' => 'Sarana Prasarana',
+                                                    'kesalahan administrasi' => 'Kesalahan Administrasi',
+                                                    'pungutan liar' => 'Pungutan Liar',
+                                                    'sistem pelayanan' => 'Sistem Pelayanan',
+                                                    'informasi pelayanan' => 'Informasi Pelayanan',
+                                                    'keamanan kenyamanan' => 'Keamanan Kenyamanan',
+                                                    'lainnya' => 'Lainnya',
                                                 ];
                                             @endphp
                                             {{ $jenisPengaduan[$complaint->jenis_pengaduan] ?? '❓ Tidak Diketahui' }}
 
+                                        </span>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span>
+                                            {{-- @php
+                                                $instansi = [
+                                                    'Disdukcapil' => 'Dinas Kependudukan dan Pencatatan Sipil',
+                                                    'DPMPTSP' =>
+                                                        'Dinas Penanaman Modal dan Pelayanan Terpadu Satu Pintu',
+                                                    'Bapenda' => 'Badan Pendapatan Daerah',
+                                                    'Dishub' => 'Dinas Perhubungan',
+                                                    'Disnaker' => 'Dinas Tenaga Kerja',
+                                                    'Dinsos' => 'Dinas Sosial',
+                                                    'Dinkes' => 'Dinas Kesehatan',
+                                                    'Polri' => 'Kepolisian Negara Republik Indonesia',
+                                                    'Kemenag' => 'Kementerian Agama',
+                                                    'Imigrasi' => 'Direktorat Jenderal Imigrasi',
+                                                    'KPP' => 'Kantor Pelayanan Pajak',
+                                                    'BPJS Kesehatan' => 'Badan Penyelenggara Jaminan Sosial Kesehatan',
+                                                    'BPJS Ketenagakerjaan' =>
+                                                        'Badan Penyelenggara Jaminan Sosial Ketenagakerjaan',
+                                                    'PLN' => 'Perusahaan Listrik Negara',
+                                                    'PDAM' => 'Perusahaan Daerah Air Minum',
+                                                    'Perbankan' => 'Bank / Lembaga Perbankan',
+                                                    'Lainnya' => 'Instansi Lainnya',
+                                                ];
+                                            @endphp --}}
+                                            {{ $complaint->tanggapan ?? '❓ Belum Diproses' }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

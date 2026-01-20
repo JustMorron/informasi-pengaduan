@@ -12,7 +12,7 @@ class Complaint extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['masyarakat_id', 'judul', 'isi_complaint', 'jenis_pengaduan', 'gambar', 'status', 'tanggapan'];
+    protected $fillable = ['masyarakat_id', 'judul', 'isi_complaint', 'jenis_pengaduan', 'instansi', 'gambar', 'status', 'tanggapan'];
 
     // public function masyarakats()
     // {

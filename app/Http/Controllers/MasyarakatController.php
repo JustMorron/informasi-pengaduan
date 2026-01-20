@@ -58,6 +58,7 @@ class MasyarakatController extends Controller
             'judul' => 'required|',
             'isi_complaint' => 'required|',
             'jenis_pengaduan' => 'required',
+            'instansi' => 'required',
             'gambar' => 'nullable',
         ]);
 
@@ -71,6 +72,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'isi_complaint' => $request->isi_complaint,
             'jenis_pengaduan' => $request->jenis_pengaduan,
+            'instansi' => $request->instansi,
             'gambar' => $imagePath,
             'status' => 'pending',
         ]);
