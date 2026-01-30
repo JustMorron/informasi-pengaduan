@@ -44,6 +44,7 @@ Route::middleware(RoleMiddleware::class . ':petugas')->group(function () {
 
     Route::get('/petugas/kelola-profile', [AuthController::class, 'profilepetugas'])->name('profile-petugas');
     Route::put('/petugas/kelola-profile', [AuthController::class, 'profileupdatepetugas'])->name('update-profile-petugas');
+    Route::get('/petugas/laporan-pengaduan/excel', [PetugasController::class, 'exportExcel'])->name('laporan-pengaduan-excel');
 });
 
 Route::middleware(RoleMiddleware::class . ':masyarakat')->group(function () {

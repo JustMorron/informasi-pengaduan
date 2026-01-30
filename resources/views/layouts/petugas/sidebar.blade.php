@@ -2,8 +2,9 @@
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
                     <a href="{{ route('dashboard-petugas') }}" class='sidebar-link'>
+                        <img src="{{ asset('assets/images/logo-black.png') }}" alt="Logo" width="auto">
 
-                        <span>Dashboard</span>
+                        {{-- <span>Dashboard</span> --}}
                     </a>
 
                 </div>

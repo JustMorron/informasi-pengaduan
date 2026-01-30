@@ -26,6 +26,36 @@
             <div class="card-header">
                 <h4>Data Pengaduan</h4>
             </div>
+            <form action="{{ route('kelola-laporan-petugas') }}" method="GET" class="row mb-3 ml-0">
+                <div class="col-md-3 ml-0">
+                    <label>Status</label>
+                    <select name="status" class="form-select">
+                        <option value="">Semua</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                        <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Tanggal Mulai</label>
+                    <input type="date" name="tanggal_awal" class="form-control" value="{{ request('tanggal_awal') }}">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Tanggal Akhir</label>
+                    <input type="date" name="tanggal_akhir" class="form-control" value="{{ request('tanggal_akhir') }}">
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary mr-2">Filter</button>
+
+                    <a href="{{ route('laporan-pengaduan-excel', request()->query()) }}" class="btn btn-success">
+                        Export Excel
+                    </a>
+                </div>
+            </form>
+
             <div class="card-body">
                 <table class='table table-striped' id="table1">
                     <thead>

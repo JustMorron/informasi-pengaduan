@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Masyarakat;
 use App\Models\Complaint;
+use App\Exports\ComplaintExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PetugasController extends Controller
 {
@@ -46,10 +48,24 @@ class PetugasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function indexlaporan()
+    public function indexlaporan(Request $request)
     {
         // $complaints = Complaint::with('masyarakat.user')->get();
-        $complaints = Complaint::with('masyarakat.user')->orderBy('id', 'desc')->get();
+        // $complaints = Complaint::with('masyarakat.user')->orderBy('id', 'desc')->get();
+
+        // return view('petugas.pengaduan.index', compact('complaints'));
+
+        $query = Complaint::with('masyarakat.user');
+
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->tanggal_awal && $request->tanggal_akhir) {
+            $query->whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir]);
+        }
+
+        $complaints = $query->latest()->get();
 
         return view('petugas.pengaduan.index', compact('complaints'));
     }
@@ -59,6 +75,11 @@ class PetugasController extends Controller
         $complaints = Complaint::with('masyarakat.user')->findOrFail($id);
 
         return view('petugas.pengaduan.show', compact('complaints'));
+    }
+
+    public function exportExcel(Request $request)
+    {
+        return Excel::download(new ComplaintExport($request), 'laporan_pengaduan.xlsx');
     }
 
     /**

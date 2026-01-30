@@ -14,7 +14,8 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <h1 class="text-xl font-semibold text-gray-800">Sistem Pengaduan Masyarakat</h1>
+                    <img src="{{ asset('assets/images/logo-black.png') }}" alt="Logo" width="120">
+                    <h1 class="text-xl font-semibold text-gray-800 ml-5">Sistem Pengaduan Masyarakat</h1>
                 </div>
                 <div class="flex items-center space-x-4">
                     <span class="text-gray-700">Selamat datang, {{ $masyarakats->user->name }}</span>

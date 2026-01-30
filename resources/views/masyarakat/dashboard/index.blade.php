@@ -15,10 +15,11 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <h1 class="text-xl font-semibold text-gray-800">Sistem Pengaduan Masyarakat</h1>
+                    <img src="{{ asset('assets/images/logo-black.png') }}" alt="Logo" width="120">
+                    <h1 class="text-xl font-semibold text-gray-800 ml-5">Sistem Pengaduan Masyarakat</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <span class="text-gray-700">Selamat datang, {{ $masyarakats->user->name }}</span>
+                    <span class="text-gray-700">Selamat datang, {{ $masyarakats->user->name ?: '-' }}</span>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
                         <button type="submit"
@@ -49,7 +50,8 @@
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">Nama Lengkap</dt>
-                                    <dd class="text-lg font-medium text-gray-900">{{ $masyarakats->user->name }}</dd>
+                                    <dd class="text-lg font-medium text-gray-900">{{ $masyarakats->user->name ?: '-' }}
+                                    </dd>
                                 </dl>
                             </div>
                         </div>
