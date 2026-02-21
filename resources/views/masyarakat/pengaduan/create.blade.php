@@ -119,10 +119,41 @@
                                 class="mt-1 block w-full  border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('category')  @enderror"
                                 required>
                                 <option value="">-- Pilih Instansi --</option>
-                                <option value="Disdukcapil">Disdukcapil</option>
+                                <option value="DINSOS">DINSOS</option>
                                 <option value="DPMPTSP">DPMPTSP</option>
-                                <option value="Bapenda">Bapenda</option>
-                                <option value="Dishub">Dishub</option>
+                                <option value="DLH">DLH</option>
+                                <option value="DPUPR">DPUPR</option>
+                                <option value="PPID">PPID</option>
+                                <option value="DPKPP">DPKPP</option>
+                                <option value="PERPUSTAKAAN">PERPUSTAKAAN</option>
+                                <option value="ULP">ULP</option>
+                                <option value="DISHUB">DISHUB</option>
+                                <option value="DISDUKCAPIL">DISDUKCAPIL</option>
+                                <option value="BAPENDA">BAPENDA</option>
+                                <option value="DINAS KESEHATAN">DINAS KESEHATAN</option>
+                                <option value="DISNAKER">DISNAKER</option>
+                                <option value="PERUMDAM">PERUMDAM</option>
+                                <option value="BPJS KETENAGAKERJAAN">BPJS KETENAGAKERJAAN</option>
+                                <option value="PT. POS">PT. POS</option>
+                                <option value="PENGADILAN NEGERI">PENGADILAN NEGERI</option>
+                                <option value="KEJARI">KEJARI</option>
+                                <option value="BPOM">BPOM</option>
+                                <option value="BPJS KESEHATAN">BPJS KESEHATAN</option>
+                                <option value="BANK BRI">BANK BRI</option>
+                                <option value="PENGADILAN AGAMA">PENGADILAN AGAMA</option>
+                                <option value="SAMSAT">SAMSAT</option>
+                                <option value="POLRES">POLRES</option>
+                                <option value="PT. TASPEN">PT. TASPEN</option>
+                                <option value="KEMENAG">KEMENAG</option>
+                                <option value="KPP PRATAMA">KPP PRATAMA</option>
+                                <option value="BPN RI">BPN RI</option>
+                                <option value="KANWIL DIRJEN PERMASYARAKATAN BANTEN">KANWIL DIRJEN PERMASYARAKATAN
+                                    BANTEN</option>
+                                <option value="KANTOR IMIGRASI">KANTOR IMIGRASI</option>
+                                <option value="KEMENKUMHAM RI WIL. BANTEN">KEMENKUMHAM RI WIL. BANTEN</option>
+                                <option value="BJB">BJB</option>
+
+                                {{-- <option value="Dishub">Dishub</option>
                                 <option value="Disnaker">Disnaker</option>
                                 <option value="Dinsos">Dinas Sosial</option>
                                 <option value="Dinkes">Dinas Kesehatan</option>
@@ -134,7 +165,7 @@
                                 <option value="BPJS Ketenagakerjaan">BPJS Ketenagakerjaan</option>
                                 <option value="PLN">PLN</option>
                                 <option value="PDAM">PDAM</option>
-                                <option value="Perbankan">Perbankan</option>
+                                <option value="Perbankan">Perbankan</option> --}}
                                 <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>

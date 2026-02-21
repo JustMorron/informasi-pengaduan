@@ -17,6 +17,11 @@ class AuthController extends Controller
         return view('auth.index');
     }
 
+    public function home()
+    {
+        return view('home');
+    }
+
     public function login(Request $request)
     {
         // Validasi input

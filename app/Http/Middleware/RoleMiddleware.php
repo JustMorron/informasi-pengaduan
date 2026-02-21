@@ -17,7 +17,7 @@ class RoleMiddleware
     {
         // cek user login
         if (!auth()->check()) {
-            return redirect('/')->with('error', 'Silahkan login terlebih dahulu.');
+            return redirect('/login')->with('error', 'Silahkan login terlebih dahulu.');
         }
 
         // cek role user

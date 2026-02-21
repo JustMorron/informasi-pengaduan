@@ -87,6 +87,11 @@
                     <a href="{{ route('register') }}" class="text-blue-500 hover:text-blue-700 font-medium">Daftar</a>
                 </p>
             </div>
+            <div class="text-center">
+                <p class="text-gray-600 text-sm">
+                    <a href="{{ route('home') }}" class="text-blue-500 hover:text-blue-700 font-medium">Beranda</a>
+                </p>
+            </div>
         </form>
 
     </div>

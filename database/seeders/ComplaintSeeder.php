@@ -2,372 +2,168 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Complaint;
-use App\Models\Masyarakat;
 use App\Models\User;
+use App\Models\Masyarakat;
+use App\Models\Complaint;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 class ComplaintSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        // $masyarakat = Masyarakat::first();
+        $faker = Faker::create('id_ID');
 
-        // Complaint::create([
-        //     'masyarakat_id' => $masyarakat->id,
-        //     'judul' => 'Pelayanan Terlambat',
-        //     'isi_complaint' => 'Pelayanan di loket sangat lama dan tidak sesuai jadwal.',
-        //     'jenis_pengaduan' => 'keterlambatan pelayanan',
-        //     'gambar' => 'contoh.jpg',
-        //     'status' => 'pending',
-        //     'tanggapan' => '',
-        // ]);
-
-        // Complaint::create([
-        //     'masyarakat_id' => $masyarakat->id,
-        //     'judul' => 'Sikap Petugas Kurang Ramah',
-        //     'isi_complaint' => 'Petugas kurang sopan saat melayani masyarakat.',
-        //     'jenis_pengaduan' => 'sikap petugas',
-        //     'gambar' => null,
-        //     'status' => 'diproses',
-        //     'tanggapan' => '',
-        // ]);
-
-        // 30 Data User Masyarakat (1 user = 1 pengaduan)
-        $users = [
-            [
-                'user' => [
-                    'name' => 'Ahmad Santoso',
-                    'email' => 'ahmad.santoso@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678001',
-                    'pekerjaan' => 'Karyawan Swasta',
-                    'status_pernikahan' => 'Belum Menikah',
-                    'tanggal_lahir' => '1994-05-12',
-                    'alamat' => 'Jl. Raya Labuan KM 3, Pandeglang, Banten',
-                    'no_hp' => '081234560001',
-                    'jenis_kelamin' => 'Laki-Laki',
-                ],
-                'complaint' => [
-                    'judul' => 'Sistem Antrian Tidak Jelas',
-                    'isi_complaint' => 'Banyak warga menyerobot antrian karena tidak ada nomor antrian.',
-                    'jenis_pengaduan' => 'sikap petugas',
-                    'instansi' => 'DPMPTSP',
-                    'gambar' => '',
-                    'status' => 'diproses',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Sari Dewi',
-                    'email' => 'sari.dewi@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678002',
-                    'pekerjaan' => 'Pedagang',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1987-07-22',
-                    'alamat' => 'Jl. Pandeglang Raya No. 12, Pandeglang, Banten',
-                    'no_hp' => '081234560002',
-                    'jenis_kelamin' => 'Perempuan',
-                ],
-                'complaint' => [
-                    'judul' => 'Petugas Kurang Ramah',
-                    'isi_complaint' => 'Petugas terlihat kesal saat menanggapi warga yang bertanya.',
-                    'jenis_pengaduan' => 'sikap petugas',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'pending',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Budi Setiawan',
-                    'email' => 'budi.setiawan@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678003',
-                    'pekerjaan' => 'Guru',
-                    'status_pernikahan' => 'Belum Menikah',
-                    'tanggal_lahir' => '1992-11-10',
-                    'alamat' => 'Jl. Pemuda No. 5, Pandeglang, Banten',
-                    'no_hp' => '081234560003',
-                    'jenis_kelamin' => 'Laki-Laki',
-                ],
-                'complaint' => [
-                    'judul' => 'Pengurusan KTP Terlalu Lama',
-                    'isi_complaint' => 'Proses pembuatan KTP memakan waktu lebih dari 1 bulan.',
-                    'jenis_pengaduan' => 'keterlambatan pelayanan',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'pending',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Rina Melati',
-                    'email' => 'rina.melati@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678004',
-                    'pekerjaan' => 'Perawat',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1990-05-18',
-                    'alamat' => 'Jl. Diponegoro No. 12, Pandeglang, Banten',
-                    'no_hp' => '081234560004',
-                    'jenis_kelamin' => 'Perempuan',
-                ],
-                'complaint' => [
-                    'judul' => 'Pelayanan BPJS Kesehatan Lambat',
-                    'isi_complaint' => 'Proses pendaftaran BPJS Kesehatan memakan waktu terlalu lama.',
-                    'jenis_pengaduan' => 'keterlambatan pelayanan',
-                    'instansi' => 'BPJS Kesehatan',
-                    'gambar' => '',
-                    'status' => 'diproses',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Joko Prasetyo',
-                    'email' => 'joko.prasetyo@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678005',
-                    'pekerjaan' => 'Supir',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1983-09-30',
-                    'alamat' => 'Jl. Gatot Subroto No. 15, Pandeglang, Banten',
-                    'no_hp' => '081234560005',
-                    'jenis_kelamin' => 'Laki-Laki',
-                ],
-                'complaint' => [
-                    'judul' => 'Petugas Disdukcapil Tidak Memberikan Informasi Lengkap',
-                    'isi_complaint' => 'Petugas tidak menjelaskan prosedur pengurusan KK dengan jelas.',
-                    'jenis_pengaduan' => 'sikap petugas',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'pending',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Dewi Sartika',
-                    'email' => 'dewi.sartika@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678006',
-                    'pekerjaan' => 'Ibu Rumah Tangga',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1987-04-12',
-                    'alamat' => 'Jl. Pahlawan No. 8, Pandeglang, Banten',
-                    'no_hp' => '081234560006',
-                    'jenis_kelamin' => 'Perempuan',
-                ],
-                'complaint' => [
-                    'judul' => 'Mesin Fotocopy Kantor Kelurahan Rusak',
-                    'isi_complaint' => 'Mesin fotocopy tidak berfungsi sehingga warga harus mencari tempat lain.',
-                    'jenis_pengaduan' => 'sarana prasarana',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'diproses',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Agus Wijaya',
-                    'email' => 'agus.wijaya@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678007',
-                    'pekerjaan' => 'Pedagang',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1979-12-05',
-                    'alamat' => 'Jl. Hayam Wuruk No. 21, Pandeglang, Banten',
-                    'no_hp' => '081234560007',
-                    'jenis_kelamin' => 'Laki-Laki',
-                ],
-                'complaint' => [
-                    'judul' => 'Pungutan Tidak Resmi Saat Mengurus IMB',
-                    'isi_complaint' => 'Beberapa warga dimintai biaya tambahan yang tidak resmi.',
-                    'jenis_pengaduan' => 'pungutan liar',
-                    'instansi' => 'DPMPTSP',
-                    'gambar' => '',
-                    'status' => 'pending',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Maya Indah',
-                    'email' => 'maya.indah@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678008',
-                    'pekerjaan' => 'Akuntan',
-                    'status_pernikahan' => 'Belum Menikah',
-                    'tanggal_lahir' => '1993-08-19',
-                    'alamat' => 'Jl. Thamrin No. 7, Pandeglang, Banten',
-                    'no_hp' => '081234560008',
-                    'jenis_kelamin' => 'Perempuan',
-                ],
-                'complaint' => [
-                    'judul' => 'Alat Tulis Kantor Kurang Lengkap',
-                    'isi_complaint' => 'Beberapa dokumen tidak bisa diproses karena kekurangan alat tulis.',
-                    'jenis_pengaduan' => 'sarana prasarana',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'diproses',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Hendra Kurniawan',
-                    'email' => 'hendra.kurniawan@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678009',
-                    'pekerjaan' => 'Teknisi',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1986-06-25',
-                    'alamat' => 'Jl. Surya Sumantri No. 10, Pandeglang, Banten',
-                    'no_hp' => '081234560009',
-                    'jenis_kelamin' => 'Laki-Laki',
-                ],
-                'complaint' => [
-                    'judul' => 'Sistem Online Sering Error',
-                    'isi_complaint' => 'Website pendaftaran sering down saat digunakan.',
-                    'jenis_pengaduan' => 'sistem pelayanan',
-                    'instansi' => 'BPJS Kesehatan',
-                    'gambar' => '',
-                    'status' => 'pending',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Lina Marlina',
-                    'email' => 'lina.marlina@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678010',
-                    'pekerjaan' => 'Bidan',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1984-02-14',
-                    'alamat' => 'Jl. Ahmad Yani No. 6, Pandeglang, Banten',
-                    'no_hp' => '081234560010',
-                    'jenis_kelamin' => 'Perempuan',
-                ],
-                'complaint' => [
-                    'judul' => 'Petugas Tidak Memberikan Informasi Lengkap',
-                    'isi_complaint' => 'Saat menanyakan syarat pembuatan KK, petugas hanya memberi informasi sebagian.',
-                    'jenis_pengaduan' => 'informasi pelayanan',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'pending',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Fajar Nugroho',
-                    'email' => 'fajar.nugroho@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678011',
-                    'pekerjaan' => 'Programmer',
-                    'status_pernikahan' => 'Belum Menikah',
-                    'tanggal_lahir' => '1995-10-08',
-                    'alamat' => 'Jl. Soekarno Hatta No. 3, Pandeglang, Banten',
-                    'no_hp' => '081234560011',
-                    'jenis_kelamin' => 'Laki-Laki',
-                ],
-                'complaint' => [
-                    'judul' => 'Toilet Kantor Kotor',
-                    'isi_complaint' => 'Toilet umum tidak terawat dan kotor.',
-                    'jenis_pengaduan' => 'keamanan kenyamanan',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'diproses',
-                    'tanggapan' => null,
-                ],
-            ],
-            [
-                'user' => [
-                    'name' => 'Nurhayati',
-                    'email' => 'nurhayati@gmail.com',
-                    'password' => bcrypt('password123'),
-                    'role' => 'masyarakat',
-                ],
-                'masyarakat' => [
-                    'nik' => '3601012345678012',
-                    'pekerjaan' => 'Pegawai Bank',
-                    'status_pernikahan' => 'Menikah',
-                    'tanggal_lahir' => '1989-11-30',
-                    'alamat' => 'Jl. Gajah Mada No. 8, Pandeglang, Banten',
-                    'no_hp' => '081234560012',
-                    'jenis_kelamin' => 'Perempuan',
-                ],
-                'complaint' => [
-                    'judul' => 'Petugas Pilih Kasih',
-                    'isi_complaint' => 'Petugas lebih melayani orang tertentu.',
-                    'jenis_pengaduan' => 'sikap petugas',
-                    'instansi' => 'Disdukcapil',
-                    'gambar' => '',
-                    'status' => 'pending',
-                    'tanggapan' => null,
-                ],
-            ],
+        $data = [
+            ['2025-12-22', 'Dinda', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-22', 'Asiyah', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-07', 'Ade', 'BAPENDA', 'Pendaftaran Pajak', 'Antrian lama karena petugas pilih nomor manual'],
+            ['2025-11-07', 'Agus Ruyani', 'Dinas Sosial', 'Konsultasi Sosial', 'Ruangan tidak dingin dan tidak wangi'],
+            ['2025-12-22', 'Wawat', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-22', 'Hanan', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-10-01', 'Aimuhtadi', 'BPJS Kesehatan', 'Pendaftaran Peserta', 'Petugas BPJS judes'],
+            ['2025-12-22', 'Lilis', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-19', 'Aminah', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-19', 'Lirgi', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-19', 'Erna', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-19', 'Nurul', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-18', 'M Miftahul', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-17', 'Marsanah', 'DISDUKCAPIL', 'Akta Kelahiran', 'beuh'],
+            ['2025-12-16', 'St Sifaira', 'DISNAKER', 'Pelayanan AK-I', 'baik'],
+            ['2025-12-16', 'Inka', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-16', 'Eha', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-05-05', 'PESA', 'DPMPTSP', 'NIB', 'baik'],
+            ['2025-12-11', 'Ica', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-10', 'Zaki', 'DISDUKCAPIL', 'Cetak KTP', 'Baik'],
+            ['2025-12-10', 'Rifki', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-10', 'Suryaman', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-10', 'Esa', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-09', 'Fajar', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-09', 'Fauzi', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-09', 'Reva', 'Perpustakaan', 'Baca Buku Digital', 'gk ada'],
+            ['2025-12-09', 'Rangga', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-09', 'Elmatian', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-09', 'Rizal', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-09', 'Fenny', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-08', 'Maulana', 'DISDUKCAPIL', 'Cetak KTP', 'mantap'],
+            ['2025-12-08', 'Rizki', 'DISDUKCAPIL', 'Rekam KTP', 'mantap'],
+            ['2025-12-08', 'Hj Dedeh', 'DISDUKCAPIL', 'Kartu Keluarga', 'Sangat memuaskan'],
+            ['2025-12-08', 'Novitasari', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-08', 'St Suirot', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-11', 'Gita', 'DISDUKCAPIL', 'KK', 'Toilet berkerak'],
+            ['2025-12-08', 'Ardi', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-08', 'Oktalia', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-08', 'Saepul', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-08', 'Mia', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-11', 'Hayati', 'DISDUKCAPIL', 'Akta Kelahiran', 'Dinding lumut'],
+            ['2025-12-05', 'Siti Maemunah', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-05', 'Desi', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-05', 'Nia', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-05', 'Dede', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-05', 'Erin', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-04', 'Rini', 'PT POS', 'Materai', 'Sangat bijak'],
+            ['2025-12-04', 'Widya', 'Bank BRI', 'Layanan Bank', 'sangat baik'],
+            ['2025-12-03', 'Siska', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-03', 'Titin', 'DISDUKCAPIL', 'KK', 'Cetakan burem'],
+            ['2025-12-03', 'Dina', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-03', 'Beri', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-12-02', 'Dian', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-28', 'Nurohman', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-28', 'M Khalif', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-27', 'Aninda', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-27', 'Azis', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-26', 'Emah', 'Dinas Sosial', 'Konsultasi Sosial', 'Sangat memuaskan'],
+            ['2025-11-26', 'Wulan', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-26', 'Riska', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-11', 'Maruf', 'Samsat', 'Pajak Kendaraan', 'Antrian lama manual'],
+            ['2025-11-26', 'Ihsan', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-26', 'Kiki', 'BPJS Kesehatan', 'Pendaftaran Peserta', 'pelayanan sangat baik'],
+            ['2025-11-25', 'Farhan', 'DISDUKCAPIL', 'Cetak KTP', 'tingkatkan lagi'],
+            ['2025-11-25', 'Icih', 'BPJS Kesehatan', 'Pendaftaran Peserta', 'Sangat bagus'],
+            ['2025-11-25', 'Empik Tauik', 'DISDUKCAPIL', 'KK', 'mantap'],
+            ['2025-11-25', 'Rian', 'Bank BJB', 'Pembayaran Pajak', 'Tingkatkan'],
+            ['2025-11-25', 'Fitri', 'DISDUKCAPIL', 'KK', 'baik ramah'],
+            ['2025-11-24', 'Ridwah', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-24', 'Iim', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-24', 'Nada', 'DISDUKCAPIL', 'KK', 'lebih baik lagi'],
+            ['2025-10-13', 'UUM', 'PT TASPEN', 'Tabungan Hari Tua', 'Tingkatkan pelayanan'],
+            ['2025-11-24', 'Mira', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-24', 'Neng Sri', 'DISDUKCAPIL', 'Cetak KTP', 'sangat baik'],
+            ['2025-11-24', 'Rena', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-24', 'Alif', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-24', 'Novi', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-24', 'Syifa', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-24', 'Aep', 'Dinas Sosial', 'SKM', 'sangat baik'],
+            ['2025-11-24', 'Sulis', 'Dinas Sosial', 'SKM', 'pegawai pulang cepat'],
+            ['2025-11-21', 'Nisa', 'DISDUKCAPIL', 'Cetak KTP', 'sangat memuaskan'],
+            ['2025-11-20', 'Fera', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-19', 'Rama', 'DISDUKCAPIL', 'Cetak KTP', 'memuaskan'],
+            ['2025-11-19', 'Wahyu', 'BPJS', 'Perubahan Identitas', 'sesuai sop'],
+            ['2025-11-19', 'Ami', 'DISDUKCAPIL', 'Akta Kelahiran', 'okee'],
+            ['2025-11-18', 'Hidayat', 'PT POS', 'Materai', 'Sangat baik'],
+            ['2025-11-18', 'Yati', 'DISDUKCAPIL', 'KK', 'Sangat baik'],
+            ['2025-11-18', 'Meli', 'DISDUKCAPIL', 'Cetak KTP', 'baik'],
+            ['2025-11-18', 'Nita', 'DISDUKCAPIL', 'Cetak KTP', 'baik'],
+            ['2025-11-18', 'Yoga', 'DISDUKCAPIL', 'Cetak KTP', 'baik'],
+            ['2025-11-18', 'Andre', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-18', 'M Topal', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-18', 'Meyla', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-18', 'Hesti', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-18', 'Tarmidi', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
+            ['2025-11-18', 'Ani', 'Dinas Sosial', 'SKM', 'sangat baik'],
+            ['2025-11-18', 'M Imanudin', 'DISDUKCAPIL', 'Cetak KTP', 'sangat baik'],
+            ['2025-11-18', 'Nana', 'Dinas Sosial', 'Konsultasi', 'sangat baik'],
+            ['2025-11-18', 'Dedi', 'DISDUKCAPIL', 'Cetak KTP', 'selesaikan satu dulu'],
+            ['2025-12-22', 'Dinda', 'DISNAKER', 'Pelayanan AK-I', 'BAIK'],
         ];
 
-        // Untuk digunakan dalam seeder Laravel:
+        foreach ($data as $row) {
+            [$tanggal, $nama, $instansi, $layanan, $saran] = $row;
 
-        // public function run()
-        // {
-        foreach ($users as $userData) {
-            // Buat user
-            $user = User::create($userData['user']);
+            $email = Str::slug($nama) . rand(100, 9999) . '@mail.com';
 
-            // Buat masyarakat user
-            $user->masyarakat()->create($userData['masyarakat']);
+            $user = User::create([
+                'name' => $nama,
+                'email' => $email,
+                'password' => Hash::make('password123'),
+                'role' => 'masyarakat',
+            ]);
 
-            // Buat pengaduan dengan masyarakat_id dari user yang baru dibuat
-            Complaint::create(array_merge(['masyarakat_id' => $user->id], $userData['complaint']));
+            $masyarakat = Masyarakat::create([
+                'user_id' => $user->id,
+                'nik' => rand(3201000000000000, 3299999999999999),
+                'pekerjaan' => $faker->jobTitle,
+                'status_pernikahan' => $faker->randomElement(['Menikah', 'Belum Menikah']),
+                'tanggal_lahir' => $faker->date(),
+                'alamat' => $faker->address,
+                'no_hp' => $faker->phoneNumber,
+                'jenis_kelamin' => $faker->randomElement(['Laki-Laki', 'Perempuan']),
+            ]);
+
+            $lower = strtolower($saran);
+            $jenis = 'informasi pelayanan';
+
+            if (str_contains($lower, 'antrian') || str_contains($lower, 'lama')) {
+                $jenis = 'keterlambatan pelayanan';
+            }
+            if (str_contains($lower, 'petugas') || str_contains($lower, 'judes')) {
+                $jenis = 'sikap petugas';
+            }
+            if (str_contains($lower, 'toilet') || str_contains($lower, 'ruangan') || str_contains($lower, 'lumut')) {
+                $jenis = 'sarana prasarana';
+            }
+
+            Complaint::create([
+                'masyarakat_id' => $masyarakat->id,
+                'judul' => $layanan,
+                'isi_complaint' => $saran,
+                'jenis_pengaduan' => $jenis,
+                'instansi' => $instansi,
+                'status' => 'pending',
+                'created_at' => $tanggal,
+            ]);
         }
-        // }
     }
 }
